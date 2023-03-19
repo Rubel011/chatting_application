@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>chat appllication</h1>
+    <h1 id="online"></h1>
+    <main>
+      <div id="container"></div>
+      <section id="chat_box">
+        <form action="#" id="form">
+          <input type="text" name="messageInp" id="message_input" />
+          <button class="btn" type="submit">SEND</button>
+        </form>
+      </section>
+    </main>
+  </body>
+  <script
+    src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+    integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+    crossorigin="anonymous"
+  ></script>
+</html>
+<script>
+  const socketio = io("http://localhost:8000", {
+    transports: ["websocket"],
+  });
+  const form = document.getElementById("form");
+  const messageContainer = document.getElementById("container");
+  const online = document.getElementById("online");
+
+  const append = (name,message, position) => {
+    const messageElement = document.createElement("div");
+    let d=name+" "+message;
+    messageElement.innerText =d
+    messageElement.classList.add("message");
+    messageElement.classList.add(position);
+    messageContainer.append(messageElement);
+  };
+
+ 
+  let person = prompt("Please enter your name", "Rubel Foridi");
+  socketio.emit("new_user_added", person);
+  
+  socketio.on("new_user_added", (e) => {
+    console.log(e);
+    append(e," has been joined the chat","left")
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let data = form.message_input.value;
+    if (data.length == 0) {
+      return;
+    }
+    append("you: ",data,"left")
+    socketio.emit("message", data);
+  });
+  socketio.on("user_online",(e)=>{
+    online.innerText=`User Online: ${e}`;
+  })
+ socketio.on("close",(e)=>{
+append(e," has been leaved the chat","right")
+ })
+  socketio.on("message", (data) => {
+console.log(data);
+    append(data.name+":",data.msg,"right")
+  });
+</script>
