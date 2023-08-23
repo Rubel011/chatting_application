@@ -1,0 +1,96 @@
+/* Reset default margin and padding */
+body, h1, h2, h3, h4, h5, h6, p, ul, ol {
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Set base font size and style */
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Page layout */
+  #title {
+    text-align: center;
+    padding: 20px;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  #container {
+    border: 1px solid #ddd;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    overflow-y: scroll;
+    background-color: #f8f9fa;
+  }
+  
+  #chat_box {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  #message_input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Message styling */
+  .message {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .left {
+    background-color: #f0f0f0;
+  }
+  
+  .right {
+    background-color: #007bff;
+    color: white;
+    text-align: right;
+  }
+  
+  /* Online status */
+  #online {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #007bff;
+  }
+  
+  /* Responsive Styles */
+  @media screen and (max-width: 768px) {
+    #container {
+      width: 100%;
+    }
+  }
+  
+  
