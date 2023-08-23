@@ -26,7 +26,7 @@
   ></script>
 </html>
 <script>
-  const socketio = io("http://localhost:8000", {
+  const socketio = io("https://chat-application-mm38.onrender.com", {
     transports: ["websocket"],
   });
   const form = document.getElementById("form");
@@ -35,7 +35,7 @@
 
   const append = (name,message, position) => {
     const messageElement = document.createElement("div");
-    let d=name+" "+message;
+    let d=name+":- "+message;
     messageElement.innerText =d
     messageElement.classList.add("message");
     messageElement.classList.add(position);
